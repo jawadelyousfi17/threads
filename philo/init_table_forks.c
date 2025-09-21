@@ -6,7 +6,7 @@
 /*   By: jel-yous <jel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 20:31:14 by jel-yous          #+#    #+#             */
-/*   Updated: 2025/09/21 20:36:38 by jel-yous         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:14:41 by jel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ pthread_mutex_t	*init_forks(t_table *t)
 
 void	init_table_data(int ac, char **av, t_table *t, int *err)
 {
+	*err = 0;
 	t->table_size = ft_atol(av[1], err);
 	t->time_to_die = ft_atol(av[2], err);
 	t->time_to_eat = ft_atol(av[3], err);
@@ -72,6 +73,9 @@ void	init_table_data(int ac, char **av, t_table *t, int *err)
 	t->is_all_eatean = 0;
 	t->start_time = ft_gettime();
 	t->is_dead = 0;
+	if (t->table_size == 0 || t->time_to_die == 0
+		|| t->time_to_eat == 0 || t->time_to_die == 0)
+		*err = -1;
 }
 
 t_table	*init_table(int ac, char **av)
